@@ -11,12 +11,14 @@
 - **Cleaning & Prep:** Filtered metros with consistent yearly data; standardized income and price fields; aggregated metro-level averages for scatter plots; added growth calculations to visualize bubble size and long-term trends.
 
 ```js
-import \* as d3 from "npm:d3";
-import {FileAttachment} from "observablehq:stdlib";
-```
+import * as d3 from "npm:d3";
+import { Inputs } from "observablehq:stdlib";
 
-```js
-const homets = FileAttachment("data/HomeTS.csv").csv({ typed: true });
+const homets = await d3.csv("/data/HomeTS.csv", d3.autoType);
+
+// Debug
+console.log("Loaded rows:", homets.length);
+console.log("First row:", homets[0]);
 ```
 
 <div class="card">
@@ -232,4 +234,3 @@ Median Rent (sum): $${fmt$(d.rent)}`,
 - **Market Structure:** Income explains a substantial share of price variation, but not all. Amenities, migration flows, and local housing constraints likely drive the remaining differences.
 - **Sanity Checks:** High-price outliers correspond to metros with stronger long-term appreciation and higher-income populations. Removing these points does not alter the overall income–price correlation trend.
 
-const data = await d3.csv("/data/HomeTS.csv");
